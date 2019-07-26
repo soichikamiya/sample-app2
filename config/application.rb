@@ -14,5 +14,9 @@ module SampleApp
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+    # モデル/コントローラー作成時に関係するrspecを自動で作成する
+    config.generators do |g|
+      g.test_framework :rspec
+    end
   end
 end

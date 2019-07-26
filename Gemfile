@@ -12,6 +12,7 @@ gem 'jbuilder',     '2.7.0'
 group :development, :test do
   gem 'sqlite3', '1.3.13'
   gem 'byebug',  '9.0.6', platform: :mri
+  gem 'factory_bot_rails', '~> 4.11'
 end
 
 group :development do
@@ -24,9 +25,19 @@ end
 group :test do
   gem 'rails-controller-testing', '1.0.2'
   gem 'minitest',                 '5.10.3'
+  # minitestのred, Green色分け
   gem 'minitest-reporters',       '1.1.14'
+  # bundle exec guard で自動テスト開始
   gem 'guard',                    '2.13.0'
   gem 'guard-minitest',           '2.4.4'
+  gem 'rspec-rails',              '~> 3.7'
+  # Adds support for Capybara system testing and selenium driver
+  gem 'capybara',                 '~> 2.13'
+  gem 'selenium-webdriver',       '~> 3.4.1'
+  # chromedriver-helperはサポート切れなので直接インストールしてPATH(which ruby)へ配置
+  # Easy installation and use of chromedriver to run system tests with Chrome
+  # gem 'chromedriver-helper'
+  # gem 'webdrivers'
 end
 
 group :production do
