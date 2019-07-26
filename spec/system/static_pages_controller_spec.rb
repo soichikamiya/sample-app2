@@ -58,6 +58,3 @@ RSpec.describe '静的ページ確認', type: :system do
     end
   end
 end
-
-
-
