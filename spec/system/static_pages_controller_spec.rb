@@ -16,15 +16,16 @@ RSpec.describe '静的ページ確認', type: :system do
       it { expect(page).to have_content "Ruby on Rails" }
     end
     
+    shared_examples_for 'タイトルが正常に表示されている' do
+      it { expect(page).to have_title "#{@base_title}" }
+    end
+    
     context 'ルートURLの時' do
       before do
         url_root
       end
-      # shared_examples_for から呼び出し
       it_behaves_like '画面に Ruby on Rails が表示されている'
-      it 'タイトルが正常に表示されている' do
-        expect(page).to have_title "Home | #{@base_title}"
-      end
+      it_behaves_like 'タイトルが正常に表示されている'
     end
     
     context 'ホームURLの時' do
@@ -32,9 +33,7 @@ RSpec.describe '静的ページ確認', type: :system do
         home_url
       end
       it_behaves_like '画面に Ruby on Rails が表示されている'
-      it 'タイトルが正常に表示されている' do
-        expect(page).to have_title "Home | #{@base_title}"
-      end
+      it_behaves_like 'タイトルが正常に表示されている'
     end
     
     context 'ヘルプURLの時' do
