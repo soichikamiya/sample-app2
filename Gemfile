@@ -39,6 +39,8 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   # gem 'chromedriver-helper'
   # gem 'webdrivers'
+  # Springを使用し bin/rspec 実行で実行開始時間を早めることができる
+  gem 'spring-commands-rspec'
 end
 
 group :production do

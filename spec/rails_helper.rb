@@ -19,8 +19,9 @@ require 'rspec/rails'
 # of increasing the boot-up time by auto-requiring all files in the support
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
-#
-# Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
+
+#spec/support/配下のファイルを読み込むことができる
+Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
@@ -58,6 +59,9 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # Factory_botのメソッドを使用する際に名前空間の指定を省略できる
+  # FactoryBot.create(:user) → create(:user)
   config.include FactoryBot::Syntax::Methods
   config.include Capybara::DSL
 end
