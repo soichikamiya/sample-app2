@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe '静的ページ確認', type: :system do
   describe '各画面の表示確認' do
-    let(:url_root)  { visit root_url }
-    let(:home_url)  { visit static_pages_home_url }
-    let(:help_url)  { visit static_pages_help_url }
-    let(:about_url) { visit static_pages_about_url }
+    let(:url_root)    { visit root_path }
+    let(:help_url)    { visit help_path }
+    let(:about_url)   { visit about_path }
+    let(:contact_url) { visit contact_path }
     
     before do
       @base_title = "Ruby on Rails Tutorial Sample App"
@@ -26,14 +26,13 @@ RSpec.describe '静的ページ確認', type: :system do
       end
       it_behaves_like '画面に Ruby on Rails が表示されている'
       it_behaves_like 'タイトルが正常に表示されている'
-    end
-    
-    context 'ホームURLの時' do
-      before do
-        home_url
+      it '各リンクが表示されている', js: true do
+        expect(page).to have_selector 'h1', text: 'Welcome to the Sample App'
+        expect(page).to have_selector 'a[href="/"]', count: 2
+        expect(page).to have_selector 'a[href="/help"]', text: 'Help', count: 1
+        expect(page).to have_selector 'a[href="/about"]', text: 'About'
+        expect(page).to have_selector 'a[href="/contact"]', text: 'Contact'
       end
-      it_behaves_like '画面に Ruby on Rails が表示されている'
-      it_behaves_like 'タイトルが正常に表示されている'
     end
     
     context 'ヘルプURLの時' do
@@ -53,6 +52,26 @@ RSpec.describe '静的ページ確認', type: :system do
       it_behaves_like '画面に Ruby on Rails が表示されている'
       it 'タイトルが正常に表示されている' do
         expect(page).to have_title "About | #{@base_title}"
+      end
+    end
+    
+    context 'コンタクトURLの時' do
+      before do
+        contact_url
+      end
+      it_behaves_like '画面に Ruby on Rails が表示されている'
+      it 'タイトルが正常に表示されている' do
+        expect(page).to have_title "Contact | #{@base_title}"
+      end
+    end
+    
+    context 'サインアップURLの時' do
+      before do
+        visit signup_path
+      end
+      it_behaves_like '画面に Ruby on Rails が表示されている'
+      it 'タイトルが正常に表示されている' do
+        expect(page).to have_title "Sign up | #{@base_title}"
       end
     end
   end
