@@ -16,7 +16,9 @@ module SampleApp
     # -- all .rb files in that directory are automatically loaded.
     # モデル/コントローラー作成時に関係するrspecを自動で作成する
     config.generators do |g|
-      g.test_framework :rspec
+      g.test_framework :rspec,
+      view_specs: false,
+      helper_specs: false
     end
   end
 end

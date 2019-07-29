@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails',        '5.1.6'
+gem 'bcrypt',         '3.1.12'
 gem 'bootstrap-sass', '3.3.7'
 gem 'puma',         '3.9.1'
 gem 'sass-rails',   '5.0.6'
@@ -39,6 +40,8 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
   # gem 'chromedriver-helper'
   # gem 'webdrivers'
+  # Springを使用し bin/rspec 実行で実行開始時間を早めることができる
+  gem 'spring-commands-rspec'
 end
 
 group :production do
