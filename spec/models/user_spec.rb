@@ -60,5 +60,15 @@ RSpec.describe User, type: :model do
       expect(@user.reload.email).to eq(mixed_case_email.downcase)
     end
 
+    it "passwordが空だとNG" do
+      @user.password = @user.password_confirmation = " " * 6
+      expect(@user).not_to be_valid
+    end
+
+    it "passwordが5文字以下だとNG" do
+      @user.password = @user.password_confirmation = "a" * 5
+      expect(@user).not_to be_valid
+    end
+
   end
 end

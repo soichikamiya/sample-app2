@@ -10,4 +10,6 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX },
                     # 大文字小文字を区別せず一意か確認
                     uniqueness: { case_sensitive: false }
+  has_secure_password
+  validates :password, presence: true, length: { minimum: 6 }
 end
