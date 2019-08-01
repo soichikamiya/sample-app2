@@ -24,7 +24,7 @@ Rails.application.configure do
 
   # Raise exceptions instead of rendering exception templates.
   # 例外がアプリケーションまで届くのでルートが通る
-  config.action_dispatch.show_exceptions = true
+  config.action_dispatch.show_exceptions = false
 
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false
