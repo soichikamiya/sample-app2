@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     # @user = User.new(params[:user])
     @user = User.new(user_params)
     if @user.save
+      # [success, info, warning, danger] (青、緑、黄、赤)
       flash[:success] = "Welcome to the Sample App!"
       # redirect_to user_url(@user) と同じ
       redirect_to @user

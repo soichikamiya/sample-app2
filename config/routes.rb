@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
+
   root 'static_pages#home'
   
   # get 'static_pages/help'
@@ -7,6 +9,11 @@ Rails.application.routes.draw do
   get  '/contact', to: 'static_pages#contact'
   # get 'users/new'
   get  '/signup',  to: 'users#new'
-  
+
+  get    '/login',   to: 'sessions#new'
+  post   '/login',   to: 'sessions#create'
+  delete '/logout',  to: 'sessions#destroy'
+
+  # RESTfulなURLを通して、ユーザー情報をリソースとして扱える
   resources :users
 end
