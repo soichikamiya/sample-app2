@@ -24,6 +24,7 @@ RSpec.describe 'ユーザー登録', type: :system do
       expect(response).to have_http_status(302)
       expect(response).to redirect_to User.last
       expect(flash[:success]).to be_present
+      expect(session[:user_id]).to eq(1)
       # expect(page).to have_selector 'div.alert-success'
     end
   end
