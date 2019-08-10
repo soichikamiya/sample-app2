@@ -79,6 +79,14 @@ RSpec.describe 'ユーザーログイン', type: :system do
       expect(page).to have_link 'Profile', href: user_path(@user), count: 1
 
       # サーバー処理
+      expect do
+        post login_url, params: { session: { email: "testuser@test.com", password: "password", remember_me: 1 } }
+      end.not_to change(User, :count)
+      expect(response).to have_http_status(302)
+      expect(session[:user_id]).to eq(@user.id)
+      expect(cookies[:user_id]).to be_present
+      expect(cookies[:remember_token]).to be_present
+
       delete logout_url
       expect(response).to have_http_status(302)
       expect(session[:user_id]).to eq(nil)
@@ -91,6 +99,7 @@ RSpec.describe 'ユーザーログイン', type: :system do
         click_on 'Log out'
       expect(response).to have_http_status(302)
       expect(page).to have_content "Welcome to the Sample App"
+      expect(page).not_to have_content "Account"
       expect(page).to have_link 'Log in', href: login_path, count: 1
       expect(page).to have_link 'Log out', href: logout_path, count: 0
       expect(page).to have_link 'Profile', href: user_path(@user), count: 0

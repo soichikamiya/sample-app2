@@ -10,8 +10,8 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       # session[:user_id] = user.id　説明はセッションヘルパー参照
       log_in user
-      # 永続cookieに user.id と user.remember_token を作成
-      remember user
+      # remember_meがONなら、永続cookieに user.id と user.remember_token を作成
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       redirect_to user
     else
       # [success, info, warning, danger] (緑、青、黄、赤)
@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
 
   def destroy
     # session.delete(:user_id)
-    log_out
+    log_out if logged_in?
     redirect_to root_url
   end
 end

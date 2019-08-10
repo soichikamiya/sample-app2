@@ -39,7 +39,13 @@ class User < ApplicationRecord
 
   # 渡されたトークンが self.remember_digest と一致したらtrueを返す
   def authenticated?(remember_token)
+    return false if remember_digest.nil?
     # bcrypt gemのソースコードにあるハッシュ値の比較方法
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
+  end
+
+  # ユーザーのログイン情報を破棄する
+  def forget
+    update_attribute(:remember_digest, nil)
   end
 end
