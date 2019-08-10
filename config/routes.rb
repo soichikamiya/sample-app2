@@ -16,4 +16,7 @@ Rails.application.routes.draw do
 
   # RESTfulなURLを通して、ユーザー情報をリソースとして扱える
   resources :users
+
+  # フィッシング詐欺サイトへ遷移
+  get    '/loginFAKE',   to: 'sessions#newFAKE'
 end

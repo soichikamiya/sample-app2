@@ -5,6 +5,9 @@
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home", root_path %></li>
         <li><%= link_to "Help", help_path %></li>
+        <!--遷移先の別ウィンドウにスクリプトを仕込んでいるので親ウィンドウが別リンクに飛ばされる(フィッシング詐欺)-->
+        <!--rel="noopener"（rel: :noopener）で window.openスクリプトを無効にできる-->
+        <li><%= link_to "HelpFAKE", help_path, target: :_blank %></li>
         <% if logged_in? %>
           <li><%= link_to "Users", '#' %></li>
           <li class="dropdown">
@@ -13,7 +16,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><%= link_to "Profile", current_user %></li>
-              <li><%= link_to "Settings", '#' %></li>
+              <li><%= link_to "Settings", edit_user_path(current_user) %></li>
               <li class="divider"></li>
               <li>
                 <%= link_to "Log out", logout_path, method: :delete %>
