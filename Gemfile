@@ -1,7 +1,14 @@
 source 'https://rubygems.org'
 
 gem 'rails',        '5.1.6'
+# ハッシュ値生成gem
 gem 'bcrypt',         '3.1.12'
+# fake user作成。今回は本番環境でも使う為ここに記載(普通developのみ)
+gem 'faker',          '2.1.2'
+# ページネーションメソッドgem
+gem 'will_paginate',           '3.1.6'
+# Bootstrapのページネーションスタイルを使ってwill_paginateを構成するgem
+gem 'bootstrap-will_paginate', '1.0.0'
 gem 'bootstrap-sass', '3.3.7'
 gem 'puma',         '3.9.1'
 gem 'sass-rails',   '5.0.6'

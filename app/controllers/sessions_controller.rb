@@ -12,7 +12,8 @@ class SessionsController < ApplicationController
       log_in user
       # remember_meがONなら、永続cookieに user.id と user.remember_token を作成
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_to user
+      # redirect_to user
+      redirect_back_or user
     else
       # [success, info, warning, danger] (緑、青、黄、赤)
       # flash[:danger] = 'Invalid email/password combination'

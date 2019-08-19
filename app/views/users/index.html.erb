@@ -1,0 +1,14 @@
+<% provide(:title, 'All users') %>
+<h1>All users<%= User.first.admin %></h1>
+
+<%= will_paginate %>
+
+<ul class="users">
+  <%# @users.each do |user| %>
+    <%#= render user %>
+  <%# end %>
+  <!--Railsは@usersをUserオブジェクトのリストであると推測する-->
+  <%= render @users %>
+</ul>
+
+<%= will_paginate %>
