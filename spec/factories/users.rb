@@ -5,6 +5,8 @@ FactoryBot.define do
     sequence(:email) { |n| "Test-#{n}@example.com"}
     sequence(:password) { |n| "Password#{n}"}
     sequence(:password_confirmation) { |n| "Password#{n}"}
+    activated { true }
+    activated_at { Time.zone.now }
   end
 
   # Userクラスでモデル名以外の名前を作成
@@ -15,5 +17,7 @@ FactoryBot.define do
     password { "password" }
     password_confirmation { "password" }
     admin { true }
+    activated { true }
+    activated_at { Time.zone.now }
   end
 end
