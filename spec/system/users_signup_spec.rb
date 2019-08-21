@@ -22,10 +22,11 @@ RSpec.describe 'ユーザー登録', type: :system do
                                           password: "foobar", password_confirmation: "foobar" } }
       end.to change(User, :count).by(1)
       expect(response).to have_http_status(302)
-      expect(response).to redirect_to User.last
-      expect(flash[:success]).to be_present
-      expect(session[:user_id]).to eq(1)
-      # expect(page).to have_selector 'div.alert-success'
+      # 11章2.4でユーザー作成後の遷移先変更と未ログインの為下記コメントアウト
+      # expect(response).to redirect_to User.last
+      # expect(flash[:success]).to be_present
+      # expect(session[:user_id]).to eq(1)
+      # expect(page).to have_selector 'div.alert-success'  #サーバー側の為pageの確認は不可
     end
   end
 end

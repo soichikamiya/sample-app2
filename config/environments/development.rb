@@ -27,7 +27,12 @@ Rails.application.configure do
   end
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  # development環境のメール設定(メール送信しなくても /rails/mailers/user_mailer からプレビュー確認可能)
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :test
+  # メール本文のURLでhostを指定する。hostの後に edit_account_activation_url(/account_activations/○○/edit)と続く
+  host = '985b960af22941169449f5a59b363c0c.vfs.cloud9.ap-northeast-1.amazonaws.com'
+  config.action_mailer.default_url_options = { host: host, protocol: 'https' }
 
   config.action_mailer.perform_caching = false
 

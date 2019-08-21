@@ -23,11 +23,16 @@ class UsersController < ApplicationController
     # @user = User.new(params[:user])
     @user = User.new(user_params)
     if @user.save
-      log_in @user
-      # [success, info, warning, danger] (青、緑、黄、赤)
-      flash[:success] = "Welcome to the Sample App!"
-      # redirect_to user_url(@user) と同じ
-      redirect_to @user
+      # アカウント有効化が必要な為下記はコメントアウト
+      # log_in @user
+      # # [success, info, warning, danger] (緑、青、黄、赤)
+      # flash[:success] = "Welcome to the Sample App!"
+      # # redirect_to user_url(@user) と同じ
+      # redirect_to @user
+
+      UserMailer.account_activation(@user).deliver_now
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to root_url
     else
       render 'new'
     end
