@@ -34,7 +34,7 @@ RSpec.describe SessionsHelper, type: :helper do
       expect(session[:user_id]).to eq(@user.id)
       expect(cookies.permanent.signed[:user_id]).to eq(@user.id)
       expect(cookies.permanent[:remember_token]).not_to eq(nil)
-      expect(@user.authenticated?(cookies[:remember_token])).to eq(true)
+      expect(@user.authenticated?(:remember, cookies[:remember_token])).to eq(true)
     end
   end
 end

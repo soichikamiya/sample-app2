@@ -22,7 +22,7 @@ RSpec.describe SessionsController, type: :controller do
       expect(@user.remember_digest).to eq(nil)
       expect(cookies.permanent.signed[:user_id]).to eq(nil)
       expect(cookies.permanent[:remember_token]).to eq(nil)
-      expect(@user.authenticated?(cookies[:remember_token])).to eq(false)
+      expect(@user.authenticated?(:remember, cookies[:remember_token])).to eq(false)
     end
 
     it "チェックが有る場合永続保存されること" do
@@ -37,7 +37,7 @@ RSpec.describe SessionsController, type: :controller do
       # cookies[:user_id]だと暗号化されたままで、下記だと複合化で確認可能
       expect(cookies.permanent.signed[:user_id]).to eq(@user.id)
       expect(cookies.permanent[:remember_token]).not_to eq(nil)
-      expect(@user.authenticated?(cookies[:remember_token])).to eq(true)
+      expect(@user.authenticated?(:remember, cookies[:remember_token])).to eq(true)
     end
   end
 end

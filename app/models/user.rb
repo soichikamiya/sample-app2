@@ -42,15 +42,34 @@ class User < ApplicationRecord
   end
 
   # 渡されたトークンが self.remember_digest と一致したらtrueを返す
-  def authenticated?(remember_token)
-    return false if remember_digest.nil?
+  def authenticated?(attribute, token)
+    # sendで与えるメソッドを動的に変えれる（メタプログラミングと呼ぶ。下記に例）
+    # [1, 2, 3].length ⇨ 3
+    # len = :length or "length"
+    # [1, 2, 3].send(len) ⇨ 3
+
+    # user.send("activation_digest") で user.activation_digest と同じになる
+    digest = self.send("#{attribute}_digest") # user.remember_digest / user.activation_digest
+    return false if digest.nil?
     # bcrypt gemのソースコードにあるハッシュ値の比較方法
-    BCrypt::Password.new(remember_digest).is_password?(remember_token)
+    BCrypt::Password.new(digest).is_password?(token)
   end
 
   # ユーザーのログイン情報を破棄する
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  # アカウントを有効にする
+  def activate
+    # update_attribute(:activated,    true)
+    # update_attribute(:activated_at, Time.zone.now)
+    update_columns(activated: true, activated_at: Time.zone.now)
+  end
+
+  # 有効化用のメールを送信する
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
   end
 
   private

@@ -29,7 +29,7 @@ RSpec.describe '静的ページ確認', type: :system do
       it '各リンクが表示されている', js: true do
         expect(page).to have_selector 'h1', text: 'Welcome to the Sample App'
         expect(page).to have_selector 'a[href="/"]', count: 2
-        expect(page).to have_selector 'a[href="/help"]', text: 'Help', count: 1
+        expect(page).to have_selector 'a[href="/help"]', text: 'Help', count: 2
         expect(page).to have_selector 'a[href="/about"]', text: 'About'
         expect(page).to have_selector 'a[href="/contact"]', text: 'Contact'
       end

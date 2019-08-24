@@ -20,4 +20,16 @@ FactoryBot.define do
     activated { true }
     activated_at { Time.zone.now }
   end
+
+  # activation用のUserクラスを作成
+  factory :activated_user, class: User do
+    name { "TaroTanaka" }
+    email { "testuser@test.com" }
+    # password_digest { User.digest("password") }
+    password { "password" }
+    password_confirmation { "password" }
+    admin { false }
+    activated { false }
+    activated_at { nil }
+  end
 end
