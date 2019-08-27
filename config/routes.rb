@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'password_resets/new'
+
+  get 'password_resets/edit'
+
   get 'sessions/new'
 
   root 'static_pages#home'
@@ -19,6 +23,9 @@ Rails.application.routes.draw do
 
   # アカウント有効化用のresources行を追加
   resources :account_activations, only: [:edit]
+
+  # パスワード再設定用リソースを追加
+  resources :password_resets, only: [:new, :create, :edit, :update]
 
   # フィッシング詐欺サイトへ遷移
   get    '/loginFAKE',   to: 'sessions#newFAKE'

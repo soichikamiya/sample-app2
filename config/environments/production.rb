@@ -66,6 +66,7 @@ Rails.application.configure do
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # 本番環境でSendGrid(heroku用メール送信アドオン)を使う設定
+  # SendGridでクレカを登録していないので実際には飛ばない
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   host = 'sample-app0912.herokuapp.com'
