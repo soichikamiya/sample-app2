@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  # micropostsはユーザーと一緒に破棄される
+  has_many :microposts, dependent: :destroy
   # passwordのような仮想属性を作成、remember_digestに保存する為処理を加える
   attr_accessor :remember_token, :activation_token, :reset_token
 
