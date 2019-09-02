@@ -25,3 +25,10 @@ User.create!(name:  "Example User",
                activated: true,
                activated_at: Time.zone.now)
 end
+
+# 最初に登録した6人を取得し、ランダムなコンテンツを50個登録する
+users = User.order(:created_at).take(6)
+50.times do
+  content = Faker::Lorem.sentence
+  users.each { |user| user.microposts.create!(content: content) }
+end

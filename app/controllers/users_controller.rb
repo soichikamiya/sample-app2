@@ -13,6 +13,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @microposts = @user.microposts.paginate(page: params[:page])
     # 有効でないユーザーは初期画面へ遷移
     redirect_to root_url and return unless @user.activated?
   end
@@ -67,15 +68,6 @@ class UsersController < ApplicationController
     def user_params
       # adminカラムの引数(値)は許可しないように下記には記載しないようにする
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
-    end
-
-    # ログイン済みユーザーかどうか確認
-    def logged_in_user
-      unless logged_in?
-        store_location
-        flash[:danger] = "Please log in."
-        redirect_to login_url
-      end
     end
 
     # 正しいユーザーかどうか確認

@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 20190829132756) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    # 1つの配列に含めることで、Active Recordは両方のキーを同時に扱う複合キーインデックス (Multiple Key Index) を作成する
     t.index ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_microposts_on_user_id"
   end

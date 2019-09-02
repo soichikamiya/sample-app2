@@ -27,6 +27,9 @@ Rails.application.routes.draw do
   # パスワード再設定用リソースを追加
   resources :password_resets, only: [:new, :create, :edit, :update]
 
+  #ポストリソースのRESTfulルート、表示は別ページ内の為 POST/DELETEアクション のみ使用
+  resources :microposts, only: [:create, :destroy]
+
   # フィッシング詐欺サイトへ遷移
   get    '/loginFAKE',   to: 'sessions#newFAKE'
 end

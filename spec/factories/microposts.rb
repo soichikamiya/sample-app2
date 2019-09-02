@@ -4,6 +4,13 @@ FactoryBot.define do
     user { nil }
   end
 
+  factory :microposts, class: Micropost do
+    # データを生成する毎に通し番号をふってユニークな値を作る
+    sequence(:content) { Faker::Lorem.sentence }
+    sequence(:created_at) { 42.days.ago }
+    sequence(:user) { User.first }
+  end
+
   factory :orange, class: Micropost do
     content { "I just ate an orange!" }
     user { User.first }

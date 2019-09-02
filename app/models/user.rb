@@ -93,6 +93,15 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
+  # 試作feedの定義
+  # 完全な実装は次章の「ユーザーをフォローする」を参照
+  def feed
+    # 下記の疑問符があることで、SQLクエリに代入する前に self.id がエスケープされるため、
+    # SQLインジェクション(深刻なセキュリティホール)を避けることが可能。
+    # SQL文に変数を代入する場合は常にエスケープする
+    Micropost.where("user_id = ?", id)
+  end
+
   private
 
     # メールアドレスをすべて小文字にする
