@@ -26,3 +26,6 @@
 
 # Ignore Spring files.
 /spring/*.pid
+
+# アップロードされたテスト画像(Micropost用)を無視する
+/public/uploads

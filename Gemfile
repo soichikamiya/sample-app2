@@ -5,6 +5,13 @@ gem 'rails',        '5.1.6'
 gem 'bcrypt',         '3.1.12'
 # fake user作成。今回は本番環境でも使う為ここに記載(普通developのみ)
 gem 'faker',          '2.1.2'
+
+# 画像アップローダー(for microposts)
+gem 'carrierwave',             '1.2.2'
+# 画像をリサイズする(ImageMagickとRubyを繋げるgem)
+gem 'mini_magick',             '4.7.0'
+# sudo yum install -y ImageMagick で画像をリサイズ
+
 # ページネーションメソッドgem
 gem 'will_paginate',           '3.1.6'
 # Bootstrapのページネーションスタイルを使ってwill_paginateを構成するgem
@@ -52,7 +59,10 @@ group :test do
 end
 
 group :production do
+  # 本番ではPostgreSQLを使用する
   gem 'pg', '0.20.0'
+  # 本番環境で画像をアップロードする(Microposts用)
+  gem 'fog', '1.42'
 end
 
 # Windows環境ではtzinfo-dataというgemを含める必要があります
