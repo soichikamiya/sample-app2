@@ -1,3 +1,5 @@
+<!--form_tagを使ってファイルをアップロードさせたい場合はhtml: { multipart: true }オプションを渡す必要がある。-->
+<!--一方、form_forを使う場合、必要となるマルチパートに渡すオプションは、Railsが自動的に追加してくれる。-->
 <%= form_for(@micropost) do |f| %>
   <!--フォーム変数fをf.object(@micropost)とすると、関連付けられたオブジェクトにアクセス可能-->
   <%= render 'shared/error_messages', object: f.object %>

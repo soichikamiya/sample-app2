@@ -28,6 +28,7 @@ gem 'jbuilder',     '2.7.0'
 group :development, :test do
   gem 'sqlite3', '1.3.13'
   gem 'byebug',  '9.0.6', platform: :mri
+  # ●testデータ作成で独自追加
   gem 'factory_bot_rails', '~> 4.11'
 end
 
@@ -46,6 +47,7 @@ group :test do
   # bundle exec guard で自動テスト開始
   gem 'guard',                    '2.13.0'
   gem 'guard-minitest',           '2.4.4'
+  # ●下記4個は独自追加
   gem 'rspec-rails',              '~> 3.7'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara',                 '~> 2.13'

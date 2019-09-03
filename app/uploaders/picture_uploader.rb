@@ -2,6 +2,7 @@ class PictureUploader < CarrierWave::Uploader::Base
   # MiniMagickというImageMagickとRubyを繋ぐgemを使い画像をリサイズ
   include CarrierWave::MiniMagick
   # 縦横どちらかが400pxを超えていた場合、適切なサイズに縮小するオプション
+  # cssで調整してもファイルサイズは変わらないので読み込みに時間が掛かってしまう
   process resize_to_limit: [400, 400]
 
   # Include RMagick or MiniMagick support:
