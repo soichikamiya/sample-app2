@@ -11,11 +11,13 @@ class PictureUploader < CarrierWave::Uploader::Base
   # Choose what kind of storage to use for this uploader:
   # 開発環境ではローカルのファイルシステムに画像を保存する設定であり、
   # 本番環境ではクラウドストレージサービスに画像を保存する必要がある(fog gem) ※AWSのS3登録要 /config/initializers/carrier_wave.rb
-  if Rails.env.production?
-    storage :fog
-  else
-    storage :file
-  end
+  # 現時点ではAWSを設定していないので file のままにする
+  # if Rails.env.production?
+  #   storage :fog
+  # else
+  #   storage :file
+  # end
+  storage :file
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
