@@ -69,6 +69,21 @@ RSpec.describe User, type: :model do
       @user.password = @user.password_confirmation = "a" * 5
       expect(@user).not_to be_valid
     end
+  end
 
+  context 'ユーザー作成の確認' do
+    before do
+      @user1 = create(:user)
+      @user2 = create(:testuser)
+    end
+
+    it "ユーザーをフォロー＆アンフォロー出来ること" do
+      expect(@user1.following?(@user2)).to eq(false)
+      @user1.follow(@user2)
+      expect(@user1.following?(@user2)).to eq(true)
+      expect(@user2.followers.include?(@user1)).to eq(true)
+      @user1.unfollow(@user2)
+      expect(@user1.following?(@user2)).to eq(false)
+    end
   end
 end
