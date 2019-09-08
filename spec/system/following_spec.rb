@@ -78,5 +78,15 @@ RSpec.describe 'フォローページ', type: :system do
       # xhr (XmlHttpRequest) というオプションをtrueに設定し、Ajaxでリクエストを発行するよう変更
       expect { delete relationship_path(relationship), xhr: true }.to change(@user.following, :count).by(-1)
     end
+
+    # 「14章3.3 サブセレクト」最終の演習わかりにくい、、
+    it "Homeページのfeed確認" do
+      login_method
+      @micropost = create(:orange)
+      get root_path
+      @user.feed.paginate(page: 1).each do |micropost|
+        expect(response.body).to have_content CGI.escapeHTML(micropost.content)
+      end
+    end
   end
 end

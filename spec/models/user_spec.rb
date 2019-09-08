@@ -86,4 +86,33 @@ RSpec.describe User, type: :model do
       expect(@user1.following?(@user2)).to eq(false)
     end
   end
+
+  context 'feed(microposts)表示の確認' do
+    before do
+      3.times { create(:user) }
+      @user1 = User.first
+      @user2 = User.second
+      @user3 = User.third
+      @micropost = create(:orange)
+      @micropost = create(:tau_manifesto, user: @user2)
+      @micropost = create(:cat_video, user: @user3)
+    end
+
+    it "フォローしてるユーザーと自分の投稿のみ表示されること" do
+      @user1.follow(@user2)
+      expect(@user1.following?(@user2)).to eq(true)
+      # フォローしているユーザーの投稿を確認
+      @user2.microposts.each do |post_following|
+        expect(@user1.feed.include?(post_following)).to eq(true)
+      end
+      # 自分自身の投稿を確認
+      @user1.microposts.each do |post_self|
+        expect(@user1.feed.include?(post_self)).to eq(true)
+      end
+      # フォローしていないユーザーの投稿を確認
+      @user3.microposts.each do |post_unfollowed|
+        expect(@user1.feed.include?(post_unfollowed)).to eq(false)
+      end
+    end
+  end
 end

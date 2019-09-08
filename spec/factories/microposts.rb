@@ -18,13 +18,13 @@ FactoryBot.define do
   end
 
   factory :tau_manifesto, class: Micropost do
-    content { "Check out the @tauday site by @mhartl: http://tauday.com" }
+    content { "Check out the tau_manifesto" }
     user { User.first }
     created_at { 3.years.ago }
   end
 
   factory :cat_video, class: Micropost do
-    content { "Sad cats are sad: http://youtu.be/PKffm2uI4dk" }
+    content { "Sad cats are cat_video" }
     user { User.first }
     created_at { 2.hours.ago }
   end

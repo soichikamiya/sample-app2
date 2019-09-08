@@ -108,13 +108,25 @@ class User < ApplicationRecord
     reset_sent_at < 2.hours.ago
   end
 
-  # 試作feedの定義
-  # 完全な実装は次章の「ユーザーをフォローする」を参照
+  # ユーザーのステータスフィードを返す(自分の投稿＆フォローユーザーの投稿)
   def feed
     # 下記の疑問符があることで、SQLクエリに代入する前に self.id がエスケープされるため、
     # SQLインジェクション(深刻なセキュリティホール)を避けることが可能。
     # SQL文に変数を代入する場合は常にエスケープする
-    Micropost.where("user_id = ?", id)
+    # user.following_ids は user.following.map(&:id) と同じ結果を返すActive Recordが自動生成したメソッド
+
+    # SQLのサブセレクト(サブクエリ)は集合のロジックを (Railsではなく) データベース内に保存するので、
+    # より効率的にデータを取得することが可能。user_id IN (2,3,5,7,8,9,10) ではなく user_id IN (サブクエリ) となる。
+    # 同じ変数を複数の場所に挿入したい場合は、whereメソッド内の変数にキーと値をペアにする文法を使う方が便利
+
+    # Micropost.where("user_id IN (?) OR user_id = ?", following_ids, id)
+    # ↓↓↓
+
+    following_ids = "SELECT followed_id FROM relationships
+                     WHERE follower_id = :user_id"
+
+    Micropost.where("user_id IN (#{following_ids})
+                     OR user_id = :user_id", user_id: id)
   end
 
   # 下記3つは self を省略
