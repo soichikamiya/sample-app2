@@ -20,5 +20,9 @@ module SampleApp
       view_specs: false,
       helper_specs: false
     end
+
+    # 認証トークンをremoteフォームに埋め込み、
+    # ブラウザ側でJavaScriptが無効(Ajaxリクエストが送れない場合)でもJSが動くよう設定
+    config.action_view.embed_authenticity_token_in_remote_forms = true
   end
 end

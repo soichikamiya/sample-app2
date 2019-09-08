@@ -1,0 +1,5 @@
+<!--relationships_controllerのdestroyへ繋げるには、既存のRelationshipデータを渡す必要がある-->
+<%= form_for(current_user.active_relationships.find_by(followed_id: @user.id),
+             html: { method: :delete }, remote: true) do |f| %>
+  <%= f.submit "Unfollow", class: "btn btn-default" %>
+<% end %>

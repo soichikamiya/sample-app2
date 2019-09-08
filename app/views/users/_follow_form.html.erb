@@ -1,0 +1,11 @@
+<!--現在のユーザーがプロフィール表示ユーザーと異なる場合は下記を表示する-->
+<% unless current_user?(@user) %>
+  <div id="follow_form">
+    <!--現在のユーザーがプロフィール表示ユーザーをフォローしている場合は unfollowボタンを表示-->
+    <% if current_user.following?(@user) %>
+      <%= render 'unfollow' %>
+    <% else %>
+      <%= render 'follow' %>
+    <% end %>
+  </div>
+<% end %>

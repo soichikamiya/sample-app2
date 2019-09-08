@@ -9,9 +9,9 @@ RSpec.describe 'ユーザー登録', type: :system do
       end.not_to change(User, :count)
       expect(response).to have_http_status(200)
       expect(response).to render_template :new
-      # サーバー処理のため以下の画面(page)確認は出来ない
-      # expect(page).to have_selector 'div#error_explanation'
-      # expect(page).to have_selector 'div.alert-danger'
+      # サーバー処理のため以下の画面(page)確認は出来ない、と思っていたがresponse.bodyでresponse内の画面確認可能
+      expect(response.body).to have_selector 'div#error_explanation'
+      expect(response.body).to have_selector 'div.alert-danger'
     end
   end
 

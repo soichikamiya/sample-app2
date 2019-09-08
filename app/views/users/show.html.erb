@@ -7,8 +7,12 @@
         <%= @user.name %><br>
       </h1>
     </section>
+    <section class="stats">
+      <%= render 'shared/stats' %>
+    </section>
   </aside>
   <div class="col-md-8">
+    <%= render 'follow_form' if logged_in? %>
     <% if @user.microposts.any? %>
       <!--countはデータを全て出力してlengthで数えるのではなく、
       @userのmicropost数をDBに直接問い合わせるので処理が高速-->
