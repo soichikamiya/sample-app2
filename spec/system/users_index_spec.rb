@@ -4,13 +4,14 @@ RSpec.describe 'ユーザー一覧', type: :system do
   describe '一覧ページ' do
     before do
       # @user = create(:testuser)  # FactoryBot.create(:testuser)を短縮  buildだとDB登録されない
+      @user = create(:testuser)
       31.times { create(:user) }
     end
 
     it 'ページネーションが含まれているかどうか' do
       visit login_path
-        fill_in 'Email', with: 'Test-1@example.com'
-        fill_in 'Password', with: 'Password1'
+        fill_in 'Email', with: @user.email
+        fill_in 'Password', with: 'password'
         click_on 'login-id'
       visit users_path
       expect(page).to have_content "All users"
@@ -60,10 +61,11 @@ RSpec.describe 'ユーザー一覧', type: :system do
       end
     end
 
-    it 'adminユーザー以外だと削除非表示' do
+    it 'adminユーザー以外だと削除非表示',js:true do
+      @user.update_attribute(:admin, false)
       visit login_path
-        fill_in 'Email', with: 'Test-125@example.com'
-        fill_in 'Password', with: 'Password125'
+        fill_in 'Email', with: @user.email
+        fill_in 'Password', with: 'password'
         click_on 'login-id'
       visit users_path
       expect(page).to have_content "All users"
@@ -82,7 +84,8 @@ RSpec.describe 'ユーザー一覧', type: :system do
     end
 
     it 'adminユーザー以外だと削除不可' do
-      post login_url, params: { session: { email: "Test-187@example.com", password: "Password187", remember_me: 0 } }
+      @user.update_attribute(:admin, false)
+      post login_url, params: { session: { email: "testuser@test.com", password: "password", remember_me: 0 } }
       expect { delete user_url(User.second) }.to change(User, :count).by(0)
       expect(response).to have_http_status(302)
       expect(flash[:success]).to eq(nil)
