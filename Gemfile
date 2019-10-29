@@ -9,7 +9,7 @@ gem 'faker',          '2.1.2'
 # 画像アップローダー(for microposts)
 gem 'carrierwave',             '1.2.2'
 # 画像をリサイズする(ImageMagickとRubyを繋げるgem)
-gem 'mini_magick',             '4.7.0'
+gem 'mini_magick',             '4.9.4'
 # sudo yum install -y ImageMagick で画像をリサイズ
 
 # ページネーションメソッドgem
