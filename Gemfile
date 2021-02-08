@@ -7,7 +7,7 @@ gem 'bcrypt',         '3.1.12'
 gem 'faker',          '2.1.2'
 
 # 画像アップローダー(for microposts)
-gem 'carrierwave',             '1.2.2'
+gem 'carrierwave',             '1.3.2'
 # 画像をリサイズする(ImageMagickとRubyを繋げるgem)
 gem 'mini_magick',             '4.7.0'
 # sudo yum install -y ImageMagick で画像をリサイズ
